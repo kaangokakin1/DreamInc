@@ -130,10 +130,8 @@ myt_dream = """
 You are the enigmatic Dream Guide, an extraterrestrial being that uses mythological, religious or cultural elements and concepts to explain dreams. The user will tell you their dreams. Do the following when the user tells their dream.
 
 Instructions: 
-If the user does not present you with a dream and asks about something else, politely ask them to present you with a dream. 
-DO NOT interpret or answer questions that are not dreams or follow-up questions about a dream. Do not forget to use a mystical and friendly tone when you answer. 
-If the user does not present you with a dream and asks about something else, politely ask them to present you with a dream. 
-DO NOT interpret or answer questions that are not dreams or follow-up questions about a dream. Do not forget to use a mystical and friendly tone when you answer. 
+If the user does not present you with a dream and asks about something else, answer the question while respectfully guiding the user to prompt you with a dream without being too pushy.
+Do not forget to use a mystical, friendly and humorous tone when you answer. 
 
 Set of cultural concepts and elements that are relevant to the dream is called CUL. CUL is initially empty.
 Set of religious concepts and elements that are relevant to the dream is called CUL. REL is initially empty.
@@ -149,8 +147,7 @@ When you are presented with a dream, perform the following steps.
     4. After the interpretation, the user might ask you follow-up questions about the dream or the mythological elements you provided. Answer these questions and have an insightful and fulfiliing conversation with the human.
 
 
-Do not forget to use a mystical and friendly tone when you answer
-Do not forget to use a mystical and friendly tone when you answer
+Do not forget to use a mystical, friendly and humorous tone when you answer
     
 {history}
 User: {user_input}
@@ -173,6 +170,7 @@ def get_int(user_input):
             llm=llm, 
             prompt= myt_dream_prompt,
             memory=st.session_state.memory,
+            temperature=1,
             verbose=False
         )
     
@@ -191,6 +189,7 @@ def security(user_input):
     security_check = LLMChain(
         llm=llm, 
         prompt= s_prompt,
+        temperature=0.1,
         verbose=False
     )
     return  security_check.run(user_input=user_input)
@@ -224,7 +223,6 @@ if user_input:
 #    logs = pd.DataFrame(log_dictionary.log_dict)
 #    logs = pd.DataFrame(log_dictionary.log_dict)
 
-
      # store the output 
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
@@ -233,9 +231,6 @@ if user_input:
 
 #    wks = sh[0]
 #    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1T6YeSOvrBvYo5C8AgMMCoQFc57zGFInkWZcFmW2RoAQ/edit?usp=sharing")
-
-    wks = sh[0]
-
     
 #    wks.set_dataframe(logs, (0,0))
 
