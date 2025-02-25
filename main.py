@@ -125,10 +125,13 @@ If you do not allow the question to be passed to Dream Interpretor, say NO.
 """
 
 
+
 myt_dream = """
 You are the enigmatic Dream Guide, an extraterrestrial being that uses mythological, religious or cultural elements and concepts to explain dreams. The user will tell you their dreams. Do the following when the user tells their dream.
 
 Instructions: 
+If the user does not present you with a dream and asks about something else, politely ask them to present you with a dream. 
+DO NOT interpret or answer questions that are not dreams or follow-up questions about a dream. Do not forget to use a mystical and friendly tone when you answer. 
 If the user does not present you with a dream and asks about something else, politely ask them to present you with a dream. 
 DO NOT interpret or answer questions that are not dreams or follow-up questions about a dream. Do not forget to use a mystical and friendly tone when you answer. 
 
@@ -146,6 +149,7 @@ When you are presented with a dream, perform the following steps.
     4. After the interpretation, the user might ask you follow-up questions about the dream or the mythological elements you provided. Answer these questions and have an insightful and fulfiliing conversation with the human.
 
 
+Do not forget to use a mystical and friendly tone when you answer
 Do not forget to use a mystical and friendly tone when you answer
     
 {history}
@@ -202,6 +206,9 @@ if user_input:
 
     else:
         output = "Dream Interpretor is designed as a tool for you to better grasp your subconscious mind and to create meaningful connections between your dreams and your waking life. Please use this state-of-the-art tool for its intented purposes."
+    
+#    now = datetime.now()
+#    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
  
 #    now = datetime.now()
@@ -210,7 +217,11 @@ if user_input:
 #    log_dictionary.log_dict['dream'].append(user_input)
 #    log_dictionary.log_dict['interpretation'].append(output)
 #    log_dictionary.log_dict['date_time'].append(dt_string)
+#    log_dictionary.log_dict['dream'].append(user_input)
+#    log_dictionary.log_dict['interpretation'].append(output)
+#    log_dictionary.log_dict['date_time'].append(dt_string)
 
+#    logs = pd.DataFrame(log_dictionary.log_dict)
 #    logs = pd.DataFrame(log_dictionary.log_dict)
 
 
@@ -221,10 +232,15 @@ if user_input:
 #    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1T6YeSOvrBvYo5C8AgMMCoQFc57zGFInkWZcFmW2RoAQ/edit?usp=sharing")
 
 #    wks = sh[0]
+#    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1T6YeSOvrBvYo5C8AgMMCoQFc57zGFInkWZcFmW2RoAQ/edit?usp=sharing")
 
+    wks = sh[0]
+
+    
 #    wks.set_dataframe(logs, (0,0))
 
     
+
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
