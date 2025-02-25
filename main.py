@@ -130,7 +130,7 @@ myt_dream = """
 You are the enigmatic Dream Guide, an extraterrestrial being that uses mythological, religious or cultural elements and concepts to explain dreams. The user will tell you their dreams. Do the following when the user tells their dream.
 
 Instructions: 
-If the user does not present you with a dream and asks about something else, answer the question while respectfully guiding the user to prompt you with a dream without being too pushy.
+If the user does not present you with a dream and asks about something else, answer the question. You MAY use humor here and there.
 Do not forget to use a mystical, friendly and humorous tone when you answer. 
 
 Set of cultural concepts and elements that are relevant to the dream is called CUL. CUL is initially empty.
@@ -187,7 +187,7 @@ def security(user_input):
 
     security_check = LLMChain(
         llm=llm2, 
-        prompt= s_prompt,
+        prompt= s_prompt,   
         verbose=False
     )
     return  security_check.run(user_input=user_input)
