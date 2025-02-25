@@ -204,7 +204,8 @@ if user_input:
 
     else:
         output = "Dream Interpretor is designed as a tool for you to better grasp your subconscious mind and to create meaningful connections between your dreams and your waking life. Please use this state-of-the-art tool for its intented purposes."
-    
+ 
+ """
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 #    log_dictionary.log_dict['prompt'].append(myt_dream)
@@ -219,7 +220,6 @@ if user_input:
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
 
-    gc = pygsheets.authorize(service_file='dream-inc-452017-796a493afddb.json')
 
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1pmnSc820RNqq8NFpUjKSFblrPx4Of6fl2Q33EmLmE04/edit?usp=sharing")
 
@@ -227,6 +227,7 @@ if user_input:
 
     wks.set_dataframe(logs, (0,0))
 
+"""
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
