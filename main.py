@@ -160,7 +160,7 @@ if 'memory' not in st.session_state:
 
 def get_int(user_input):
 
-    llm = ChatOpenAI(openai_api_key=api_key)
+    llm = ChatOpenAI(openai_api_key=api_key, temperature=1)
 
     myt_dream_prompt = PromptTemplate(
             input_variables=["history", "user_input"], 
@@ -170,7 +170,6 @@ def get_int(user_input):
             llm=llm, 
             prompt= myt_dream_prompt,
             memory=st.session_state.memory,
-            temperature=1,
             verbose=False
         )
     
@@ -179,7 +178,7 @@ def get_int(user_input):
 
 def security(user_input):
 
-    llm = ChatOpenAI(openai_api_key=api_key)
+    llm2 = ChatOpenAI(openai_api_key=api_key, temperature=0.1)
 
     s_prompt = PromptTemplate(
         input_variables=["user_input"], 
@@ -187,9 +186,8 @@ def security(user_input):
     )
 
     security_check = LLMChain(
-        llm=llm, 
+        llm=llm2, 
         prompt= s_prompt,
-        temperature=0.1,
         verbose=False
     )
     return  security_check.run(user_input=user_input)
